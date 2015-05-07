@@ -24,21 +24,41 @@ $(document).ready(function() {
     });
 });
 
-// removes empty strings
-Array.prototype.removeEmpties = function() {
-  for (var i = 0; i < this.length; i++) {
-    if (this[i].length === 0) {         
-      this.splice(i, 1);
-      i--;
+// Array.prototype.filter polyfill, courtesy of
+// <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter>
+if (!Array.prototype.filter) {
+  Array.prototype.filter = function(fun/*, thisArg*/) {
+    'use strict';
+
+    if (this === void 0 || this === null) {
+      throw new TypeError();
     }
-  }
-  return this;
-};
+
+    var t = Object(this);
+    var len = t.length >>> 0;
+    if (typeof fun !== 'function') {
+      throw new TypeError();
+    }
+
+    var res = [];
+    var thisArg = arguments.length >= 2 ? arguments[1] : void 0;
+    for (var i = 0; i < len; i++) {
+      if (i in t) {
+        var val = t[i];
+        if (fun.call(thisArg, val, i, t)) {
+          res.push(val);
+        }
+      }
+    }
+
+    return res;
+  };
+}
 
 // .bind() polyfill
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind#Compatibility
 if (!Function.prototype.bind) {
-Function.prototype.bind = function (oThis) {
+  Function.prototype.bind = function (oThis) {
     if (typeof this !== "function") {
         // closest thing possible to the ECMAScript 5
         // internal IsCallable function

@@ -83,7 +83,7 @@ var URLManager = {
 
     getPoolInfo: function() {
         //extract pool information from document url
-        var pathArray = window.location.href.split('/').removeEmpties();
+        var pathArray = this.removeEmpties(window.location.href.split('/'));
         var poolStart = $.inArray('pool', pathArray);
 
         if (poolStart !== -1) {
@@ -104,8 +104,7 @@ var URLManager = {
 
     getDUNS: function() {
         //extract pool information from document url
-        var pathArray = window.location.href.split('/');
-        pathArray = pathArray.removeEmpties();
+        var pathArray = this.removeEmpties(window.location.href.split('/'));
         var i = pathArray.length - 1;
 
         while (i--) {
@@ -126,5 +125,11 @@ var URLManager = {
         else {
             return false;
         }
-    } 
+    },
+
+    removeEmpties: function(list) {
+      return list.filter(function(d) {
+        return d && d.length;
+      });
+    }
 };
