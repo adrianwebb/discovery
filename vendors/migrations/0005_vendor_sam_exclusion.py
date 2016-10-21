@@ -7,12 +7,12 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('vendor', '0004_vendor_sam_status'),
+        ('vendors', '0004_vendor_sam_status'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='vendor',
+            model_name='vendors',
             name='sam_exclusion',
             field=models.NullBooleanField(),
             preserve_default=True,

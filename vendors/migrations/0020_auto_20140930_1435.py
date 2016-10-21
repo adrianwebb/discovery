@@ -7,13 +7,13 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('vendor', '0019_auto_20140923_2207'),
+        ('vendors', '0019_auto_20140923_2207'),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='vendor',
+            model_name='vendors',
             name='setasides',
-            field=models.ManyToManyField(null=True, blank=True, to='vendor.SetAside'),
+            field=models.ManyToManyField(null=True, blank=True, to='vendors.SetAside'),
         ),
     ]

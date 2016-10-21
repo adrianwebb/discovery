@@ -7,7 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('vendor', '0008_samload'),
+        ('vendors', '0008_samload'),
         ('contract', '0007_auto_20140826_1829'),
     ]
 
@@ -29,8 +29,8 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='fpdscontract',
-            name='vendor',
-            field=models.ForeignKey(to='vendor.Vendor', default=691),
+            name='vendors',
+            field=models.ForeignKey(to='vendors.Vendors', default=691),
             preserve_default=False,
         ),
     ]

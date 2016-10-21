@@ -7,17 +7,17 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('vendor', '0006_vendor_sam_url'),
+        ('vendors', '0006_vendor_sam_url'),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='vendor',
+            model_name='vendors',
             old_name='oasis_address',
             new_name='sam_address',
         ),
         migrations.RenameField(
-            model_name='vendor',
+            model_name='vendors',
             old_name='oasis_citystate',
             new_name='sam_citystate',
         ),

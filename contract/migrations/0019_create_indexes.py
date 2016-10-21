@@ -12,5 +12,5 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RunSQL(""" CREATE INDEX naics_index ON contract_contract ("NAICS"); """),
-        migrations.RunSQL(""" CREATE INDEX vendor_index ON contract_contract (vendor_id) """)
+        migrations.RunSQL(""" CREATE INDEX vendors_index ON contract_contract (vendors_id) """)
     ]

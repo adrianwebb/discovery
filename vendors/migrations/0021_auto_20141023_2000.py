@@ -7,13 +7,13 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('vendor', '0020_auto_20140930_1435'),
+        ('vendors', '0020_auto_20140930_1435'),
     ]
 
     operations = [
         migrations.RunSQL(
-            """ALTER TABLE "vendor_vendor" ALTER COLUMN "annual_revenue" DROP DEFAULT; """
+            """ALTER TABLE "vendors_vendors" ALTER COLUMN "annual_revenue" DROP DEFAULT; """
             ),
-        migrations.RunSQL("""ALTER TABLE "vendor_vendor"  ALTER COLUMN "annual_revenue" TYPE BIGINT USING annual_revenue::bigint;  """
+        migrations.RunSQL("""ALTER TABLE "vendors_vendors"  ALTER COLUMN "annual_revenue" TYPE BIGINT USING annual_revenue::bigint;  """
             )
     ]

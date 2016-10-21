@@ -7,12 +7,12 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('vendor', '0002_auto_20140721_1658'),
+        ('vendors', '0002_auto_20140721_1658'),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='vendor',
+            model_name='vendors',
             name='duns_4',
             field=models.CharField(max_length=13),
         ),

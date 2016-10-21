@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RemoveField(
             model_name='fapiisrecord',
-            name='vendor',
+            name='vendors',
         ),
         migrations.AddField(
             model_name='fapiisrecord',

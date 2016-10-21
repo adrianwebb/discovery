@@ -93,7 +93,7 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = dj_database_url.config()
+#DATABASES['default'] = dj_database_url.config()
 
 SAM_API_KEY = os.getenv("OASIS_DISCOVERY_SAM_API_KEY")
 API_HOST = "https://api.data.gov/gsa/discovery"

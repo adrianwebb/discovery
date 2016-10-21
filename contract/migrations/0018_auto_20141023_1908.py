@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
         ),
         migrations.RemoveField(
             model_name='fpdscontract',
-            name='vendor',
+            name='vendors',
         ),
         migrations.DeleteModel(
             name='FPDSContract',

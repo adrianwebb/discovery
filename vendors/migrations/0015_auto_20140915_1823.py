@@ -7,13 +7,13 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('vendor', '0014_vendor_sam_expiration_date'),
+        ('vendors', '0014_vendor_sam_expiration_date'),
     ]
 
     operations = [
         migrations.RemoveField(
             model_name='contractrecord',
-            name='vendor',
+            name='vendors',
         ),
         migrations.DeleteModel(
             name='ContractRecord',

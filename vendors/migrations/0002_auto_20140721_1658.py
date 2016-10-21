@@ -7,17 +7,17 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('vendor', '0001_initial'),
+        ('vendors', '0001_initial'),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='vendor',
+            model_name='vendors',
             name='duns',
             field=models.CharField(max_length=9),
         ),
         migrations.AlterField(
-            model_name='vendor',
+            model_name='vendors',
             name='duns_4',
             field=models.CharField(max_length=12),
         ),

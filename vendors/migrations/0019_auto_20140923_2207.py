@@ -7,7 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('vendor', '0018_setaside_far_order'),
+        ('vendors', '0018_setaside_far_order'),
     ]
 
     operations = [

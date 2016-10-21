@@ -7,12 +7,12 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('vendor', '0011_vendor_cage'),
+        ('vendors', '0011_vendor_cage'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='vendor',
+            model_name='vendors',
             name='sam_activation_date',
             field=models.DateField(null=True),
             preserve_default=True,

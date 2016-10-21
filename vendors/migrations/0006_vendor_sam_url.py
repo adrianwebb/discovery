@@ -7,12 +7,12 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('vendor', '0005_vendor_sam_exclusion'),
+        ('vendors', '0005_vendor_sam_exclusion'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='vendor',
+            model_name='vendors',
             name='sam_url',
             field=models.URLField(null=True),
             preserve_default=True,
