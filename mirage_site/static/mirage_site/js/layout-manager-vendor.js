@@ -41,7 +41,10 @@ LayoutManager.render = function(results) {
 
     //load SAM expiration date
     if (results['sam_expiration_date']) {
+<<<<<<< HEAD
         //alert("sam expiration date" + results['sam_expiration_date']);
+=======
+>>>>>>> parent of ff5e6a4... fixed js problem, still can't get it working
         dateObj = this.createDate(results['sam_expiration_date']);
         formattedDate = this.formatDate(dateObj);
     }
@@ -125,7 +128,10 @@ LayoutManager.buildContractTable = function(data, listType, pageNumber) {
     for (contract in results) {
         if (results.hasOwnProperty(contract)) {
             tr = $('<tr></tr>');
+<<<<<<< HEAD
             //alert("results[contract][date_signed]" + results[contract]['date_signed']);
+=======
+>>>>>>> parent of ff5e6a4... fixed js problem, still can't get it working
             displayDate = (results[contract]['date_signed'] ? this.formatDate(this.createDate(results[contract]['date_signed'])) : ' ');
             piid = (results[contract]['piid'] ? results[contract]['piid'] : ' ');
             agencyName = (results[contract]['agency_name'] ? results[contract]['agency_name'] : ' ');

@@ -2,6 +2,7 @@
 # all applications use these settings and services
 memory: 512M
 instances: 1
+buildpack: python_buildpack
 applications:
 - name: discovery
   path: .
@@ -9,3 +10,4 @@ applications:
 default_versions:
 - name: python
   version: 2.7.11
+ 
