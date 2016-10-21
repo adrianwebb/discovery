@@ -14,12 +14,13 @@ import markdown
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+SECRET_KEY="this is totally a secret"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     "mirage.context_processors.api_host",
@@ -83,8 +84,18 @@ WSGI_APPLICATION = 'mirage.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'oasis',
+        'USER': 'oasis',
+        'PASSWORD': '1234'
+    }
+}
 
-
+SAM_API_KEY = os.getenv("OASIS_DISCOVERY_SAM_API_KEY")
+API_HOST = "https://api.data.gov/gsa/discovery"
+API_KEY = os.getenv("OASIS_DISCOVERY_API_KEY")
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/

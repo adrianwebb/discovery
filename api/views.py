@@ -77,7 +77,6 @@ class ListVendors(APIView):
             if setasides:
                 setasides = setasides.split(',')
             
-
             sam_load_results = SamLoad.objects.all().order_by('-sam_load')[:1]
             sam_load = sam_load_results[0].sam_load if sam_load_results else None
 
