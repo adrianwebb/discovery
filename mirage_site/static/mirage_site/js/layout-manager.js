@@ -16,8 +16,12 @@ var LayoutManager = {
 
     updateSAM: function(results) {
         if ($.isEmptyObject(results) === false) {
-            var dateObj = this.createDate(results['samLoad']);
-            $("#sam_load").text("SAM data updated: " + (dateObj.getMonth()) + '/' + dateObj.getDate() + '/' + dateObj.getFullYear().toString().substring(2));
+            if ( $.isEmptyObject(results['samLoad']) === false){ 
+                alert("samLoad " + results['samLoad']);
+                alert("results " + results);
+                var dateObj = this.createDate(results['samLoad']);
+                $("#sam_load").text("SAM data updated: " + (dateObj.getMonth()) + '/' + dateObj.getDate() + '/' + dateObj.getFullYear().toString().substring(2));
+            }
         }
     },
 
@@ -56,6 +60,7 @@ var LayoutManager = {
     },
 
     createDate: function(date) {
+        //alert(date);
         // in IE + Safari, if we pass the date the api sends right
         // into a date object, it outputs NaN
         // http://biostall.com/javascript-new-date-returning-nan-in-ie-or-invalid-date-in-safari
