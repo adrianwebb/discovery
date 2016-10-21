@@ -1,5 +1,5 @@
 from rest_framework import serializers, pagination
-from vendor.models import Vendor, Pool, Naics, SetAside, SamLoad
+from vendors.models import Vendors, Pool, Naics, SetAside, SamLoad
 from contract.models import Contract, FPDSLoad
 
 class SetAsideSerializer(serializers.ModelSerializer):
@@ -31,7 +31,7 @@ class VendorSerializer(serializers.ModelSerializer):
     setasides = SetAsideSerializer(many=True)
     pools = ShortPoolSerializer(many=True)
     class Meta:
-        model = Vendor
+        model = Vendors
         fields = ('name', 'duns', 'duns_4', 'cage', 'sam_address', 'sam_citystate', 'pm_name', 'pm_email', 'pm_phone', 'pools', 'setasides', 'sam_status', 'sam_expiration_date', 'sam_activation_date', 'sam_exclusion', 'sam_url', 'annual_revenue', 'number_of_employees')
 
 
@@ -40,7 +40,7 @@ class ShortVendorSerializer(serializers.ModelSerializer):
     contracts_in_naics = serializers.SerializerMethodField('get_contracts_in_naics')    
 
     class Meta:
-        model = Vendor
+        model = Vendors
         fields = ('name', 'duns', 'duns_4', 'sam_address', 'sam_citystate',
             'setasides', 'sam_status', 'sam_exclusion', 'sam_url', 'contracts_in_naics')
 

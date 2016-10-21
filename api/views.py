@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from contract.models import Contract
-from vendor.models import Vendor, Naics, SetAside, SamLoad, Pool
+from vendors.models import Vendors, Naics, SetAside, SamLoad, Pool
 from api.serializers import VendorSerializer, NaicsSerializer, PoolSerializer, ShortVendorSerializer, ContractSerializer, PaginatedContractSerializer, Metadata, MetadataSerializer, ShortPoolSerializer
 
 
@@ -24,7 +24,7 @@ class GetVendor(APIView):
             paramType: path
     """
     def get(self, request, duns, format=None):
-        vendor = Vendor.objects.get(duns=duns) 
+        vendor = Vendors.objects.get(duns=duns) 
         return Response(VendorSerializer(vendor).data) 
 
 class ListVendors(APIView):
@@ -64,7 +64,7 @@ class ListVendors(APIView):
 
     """
     def get(self, request, format=None):
-
+        
         try: 
             naics =  Naics.objects.get(short_code=request.QUERY_PARAMS.get('naics'))
             vehicle = request.QUERY_PARAMS.get('vehicle', None)
@@ -90,7 +90,7 @@ class ListVendors(APIView):
             return HttpResponseBadRequest("You must provide a valid naics code that maps to an OASIS pool")
 
     def get_queryset(self, pool, setasides, naics):
-        vendors = Vendor.objects.filter(pools__in=pool)
+        vendors = Vendors.objects.filter(pools__in=pool)
         if setasides:
             for sa in SetAside.objects.filter(code__in=setasides):
                 vendors = vendors.filter(setasides=sa)
@@ -111,7 +111,7 @@ class ListNaics(APIView):
 
         #filters
         q = self.request.QUERY_PARAMS.get('q', None)
-
+        
         codes = Naics.objects.all().order_by('description')
 
         if q:
@@ -154,6 +154,7 @@ class ListContracts(APIView):
 
     """
     def get(self, request, format=None):
+        
         contracts = self.get_queryset()
 
         if contracts == 1:
@@ -180,7 +181,7 @@ class ListContracts(APIView):
         if not duns:
             return 1
 
-        vendor = Vendor.objects.get(duns=duns)
+        vendor = Vendors.objects.get(duns=duns)
         sort = self.request.QUERY_PARAMS.get('sort', None)
         direction = self.request.QUERY_PARAMS.get('direction', None)
 

@@ -1,3 +1,5 @@
+import dj_database_url
+
 """
 Django settings for mirage project.
 
@@ -55,12 +57,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'rest_framework',
-
     'api',
     'mirage_site',
-    'vendor',
+    'vendors',
     'contract',
     'selenium_tests',
     'rest_framework_swagger',
@@ -92,6 +92,8 @@ DATABASES = {
         'PASSWORD': '1234'
     }
 }
+
+DATABASES['default'] = dj_database_url.config()
 
 SAM_API_KEY = os.getenv("OASIS_DISCOVERY_SAM_API_KEY")
 API_HOST = "https://api.data.gov/gsa/discovery"

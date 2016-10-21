@@ -6,7 +6,7 @@
 RequestsManager.load = function() {
     var url = "/api/vendors/";
     var queryData = this.buildRequestQuery();
-   
+    alert(JSON.stringify(queryData));
     if (queryData['naics'] !== "") {
 
         RequestsManager.getAPIRequest(url, queryData, function(data) {
@@ -18,6 +18,7 @@ RequestsManager.load = function() {
             resultsObj.total = 0; //overwritten below if there are any
 
             if (data.num_results !== 0) {
+                alert('got here');
                 resultsObj.vehicle = data['pool'][0]['vehicle'].toLowerCase();
                 resultsObj.numPools = data.results.length;
                 resultsObj.total = data.num_results;

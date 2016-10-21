@@ -1,5 +1,5 @@
 from django.db import models, IntegrityError
-from vendor.models import Naics, Vendor
+from vendors.models import Naics, Vendors
 
 PRICING_CHOICES = (
     ('A', 'Fixed Price Redetermination'),
@@ -58,7 +58,7 @@ class Contract(models.Model):
     PSC = models.CharField(max_length=128, null=True)
     date_signed = models.DateTimeField(null=True)
     completion_date = models.DateTimeField(null=True)
-    vendor = models.ForeignKey(Vendor)
+    vendor = models.ForeignKey(Vendors)
     pricing_type = models.CharField(choices=PRICING_CHOICES, max_length=2, null=True)
     obligated_amount = models.DecimalField(max_digits=128, decimal_places=2, null=True)
     point_of_contact = models.EmailField(null=True)

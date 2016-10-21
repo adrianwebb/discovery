@@ -6,7 +6,7 @@
 LayoutManager.render = function(results) {
     // this is turning into something of a router
     // should be refactored [TS]
-
+    
     if (this.getQSByName(document.location, 'vehicle') == "oasis") {
         //disable filters for 'oasis unrestricted' results
         this.disableFilters();
@@ -42,6 +42,7 @@ LayoutManager.renderTable = function(results) {
 
     for (i = 0; i <= len; i++) {
         $t.append(this.renderRow(results.results[i], qs, i));
+        //alert(JSON.stringify(results.results[i]));
     }
 
     $('#pool_table').show();

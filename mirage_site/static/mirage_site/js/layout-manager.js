@@ -17,8 +17,8 @@ var LayoutManager = {
     updateSAM: function(results) {
         if ($.isEmptyObject(results) === false) {
             if ( $.isEmptyObject(results['samLoad']) === false){ 
-                alert("samLoad " + results['samLoad']);
-                alert("results " + results);
+                //alert("samLoad " + results['samLoad']);
+                //alert("results " + results);
                 var dateObj = this.createDate(results['samLoad']);
                 $("#sam_load").text("SAM data updated: " + (dateObj.getMonth()) + '/' + dateObj.getDate() + '/' + dateObj.getFullYear().toString().substring(2));
             }
@@ -28,6 +28,7 @@ var LayoutManager = {
     updateResultsInfo: function(results) {
         var totalResults, totalPools, resultsStr;
         if (results['total'] == 0) {
+            alert("got here");
             totalResults = 0;
             totalPools = 0;
         }
