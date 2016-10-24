@@ -60,7 +60,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'api',
     'mirage_site',
-    'vendors',
+    'vendor',
     'contract',
     'selenium_tests',
     'rest_framework_swagger',

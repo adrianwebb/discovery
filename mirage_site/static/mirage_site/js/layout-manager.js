@@ -17,12 +17,17 @@ var LayoutManager = {
     updateSAM: function(results) {
         if ($.isEmptyObject(results) === false) {
 <<<<<<< HEAD
+<<<<<<< HEAD
             if ( $.isEmptyObject(results['samLoad']) === false){ 
                 //alert("samLoad " + results['samLoad']);
                 //alert("results " + results);
                 var dateObj = this.createDate(results['samLoad']);
                 $("#sam_load").text("SAM data updated: " + (dateObj.getMonth()) + '/' + dateObj.getDate() + '/' + dateObj.getFullYear().toString().substring(2));
             }
+=======
+            var dateObj = this.createDate(results['samLoad']);
+            $("#sam_load").text("SAM data updated: " + (dateObj.getMonth()) + '/' + dateObj.getDate() + '/' + dateObj.getFullYear().toString().substring(2));
+>>>>>>> parent of ff5e6a4... fixed js problem, still can't get it working
 =======
             var dateObj = this.createDate(results['samLoad']);
             $("#sam_load").text("SAM data updated: " + (dateObj.getMonth()) + '/' + dateObj.getDate() + '/' + dateObj.getFullYear().toString().substring(2));
