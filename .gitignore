@@ -10,6 +10,7 @@ logs/*.log
 mirage_venv/
 src/
 mvenv/
+static/
 .coverage
 .project
 .pydevproject
