@@ -13,6 +13,28 @@ grep -q "0.0.0.0/0" /etc/postgresql/9.3/main/pg_hba.conf || echo "host  all  all
 echo "CREATE USER oasis WITH password 'oasis'; CREATE DATABASE oasis ENCODING 'UTF8' OWNER oasis;" | sudo -u postgres psql
 service postgresql restart
 
+#set up redis queue
+cd /tmp
+wget http://download.redis.io/redis-stable.tar.gz
+tar xvzf redis-stable.tar.gz
+cd redis-stable
+make
+make install
+
+mkdir -p /etc/redis
+cp -f redis.conf /etc/redis/6379.conf # binds to 127.0.0.1:6379
+
+sed -i 's/^daemonize\s.*/daemonize yes/' /etc/redis/6379.conf
+sed -i 's/^dir\s.*/dir "\/var\/redis\/6379"/' /etc/redis/6379.conf
+sed -i 's/^logfile\s.*/logfile "\/var\/log\/redis_6379.log"/' /etc/redis/6379.conf
+sed -i 's/^loglevel\s.*/loglevel debug/' /etc/redis/6379.conf
+
+mkdir -p /var/redis/6379
+
+cp -f utils/redis_init_script /etc/init.d/redis # listens at 6379
+update-rc.d redis defaults
+/etc/init.d/redis start
+
 #set up virtual environment
 virtualenv /vagrant/mirage_venv
 source /vagrant/mirage_venv/bin/activate
