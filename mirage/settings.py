@@ -136,6 +136,10 @@ LOGGING = {
         'simple': {
             'format': '%(levelname)s %(message)s'
         },
+        'csv': {
+            'format' : '"%(asctime)s","%(levelname)s",%(message)s',
+            'datefmt' : "%Y-%m-%d %H:%M:%S"
+        },
     },
     'handlers': {
         'file': {
@@ -162,6 +166,12 @@ LOGGING = {
             'filename': os.path.join(BASE_DIR, 'logs/fpds.log'),
             'formatter': 'verbose'
         },
+        'fpds_memory_file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/fpds_memory.csv'),
+            'formatter': 'csv'
+        },
     },
     'loggers': {
         'django': {
@@ -180,6 +190,10 @@ LOGGING = {
         'fpds': {
             'handlers': ['fpds_file'],
             'level': 'DEBUG',
+        },
+        'fpds_memory': {
+            'handlers': ['fpds_memory_file'],
+            'level': 'INFO'
         },
 
     },
