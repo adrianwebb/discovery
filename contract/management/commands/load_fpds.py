@@ -7,10 +7,17 @@ from vendors.models import Vendor
 from contract.models import Contract, FPDSLoad
 from contract import catch_key_error
 from datetime import datetime, timedelta
+from mirage_site.utils import csv_memory, print_memory
 import pytz
 import logging
 import traceback
 
+def fpds_mem_logger():
+    return logging.getLogger('fpds_memory')
+
+def log_memory(message = "Memory"):
+    fpds_mem_logger().info(csv_memory(message))
+    
 def get_award_id_obj(award):
     if 'awardID' in award: 
         return award['awardID']
@@ -78,7 +85,7 @@ def get_contract_pricing_name(award):
         return award['contractData']['typeOfContractPricing']
 
     name = get_name(award) 
-    if name and type(name) == str:
+    if name and isinstance(name, basestring):
         return name
 
     elif name: 
@@ -99,7 +106,7 @@ def get_naics(award):
         return award['productOrServiceInformation']['principalNAICSCode']
 
     name = get_name(award) 
-    if name and type(name) == str:
+    if name and isinstance(name, basestring):
         return name
 
     elif name: 
@@ -145,6 +152,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
   
         print("-------BEGIN LOAD_FPDS PROCESS-------")
+        log_memory('Start')
+        print_memory('Start')
         try:
 
             if 'load_all' in options:
@@ -162,10 +171,15 @@ class Command(BaseCommand):
                 vendors = Vendor.objects.all().order_by('id')
 
             for v in vendors:
+              
+                log_memory("Starting [{}] {} > {}".format(v.id, v.name, v.duns))
+                print_memory("Starting [{}] {} > {}".format(v.id, v.name, v.duns))
 
                 by_piid = {} 
                 v_con = self.contracts.get(vendor_duns=v.duns, last_modified_date=self.date_format(load_from, load_to), num_records='all')
 
+                log_memory("Post Load [{}] {} > {}".format(v.id, v.name, v.duns))
+           
                 for vc in v_con:
                     
                     con_type = ''
@@ -212,6 +226,8 @@ class Command(BaseCommand):
                         by_piid[piid].append(record)
                     else:
                         by_piid[piid] = [record, ]
+
+                log_memory("Post Classify [{}] {} > {}".format(v.id, v.name, v.duns))
 
                 for piid, records in by_piid.items():
 
@@ -266,6 +282,9 @@ class Command(BaseCommand):
 
                 #save updates to annual revenue, number of employees
                 v.save()
+                log_memory("Final [{}] {} > {}".format(v.id, v.name, v.duns))
+                print_memory("Final [{}] {} > {}".format(v.id, v.name, v.duns))
+                
             create_load(load_to)
 
         except Exception as e:
@@ -275,4 +294,6 @@ class Command(BaseCommand):
             self.logger.debug("MAJOR ERROR -- PROCESS ENDING EXCEPTION -- {0}".format(e))
         
         print("-------END LOAD_FPDS PROCESS-------")
+        log_memory('End')
+        print_memory('End')
 
