@@ -139,7 +139,7 @@ LOGGING = {
         'csv': {
             'format' : '"%(asctime)s","%(levelname)s",%(message)s',
             'datefmt' : "%Y-%m-%d %H:%M:%S"
-        },
+        }
     },
     'handlers': {
         'file': {
@@ -154,11 +154,23 @@ LOGGING = {
             'filename': os.path.join(BASE_DIR, 'logs/vendor.log'),
             'formatter': 'verbose'
         },
-        'sam_file': {
-            'level': 'DEBUG',
+        'vendor_memory_file': {
+            'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/sam.log'),
-            'formatter': 'verbose'
+            'filename': os.path.join(BASE_DIR, 'logs/vendor_memory.csv'),
+            'formatter': 'csv'
+        },
+        'vendor_data_file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/vendor_data.csv'),
+            'formatter': 'csv'
+        },
+        'sam_data_file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/sam_data.csv'),
+            'formatter': 'csv'
         },
         'fpds_file': {
             'level': 'DEBUG',
@@ -185,13 +197,21 @@ LOGGING = {
             'propagate': True,
             'level':'DEBUG'
         },
-        'vendors': {
+        'vendor': {
             'handlers': ['vendor_file'],
             'level': 'DEBUG'
         },
-        'sam': {
-            'handlers': ['sam_file'],
-            'level': 'DEBUG'
+        'vendor_memory': {
+            'handlers': ['vendor_memory_file'],
+            'level': 'INFO'
+        },
+        'vendor_data': {
+            'handlers': ['vendor_data_file'],
+            'level': 'INFO'
+        },
+        'sam_data': {
+            'handlers': ['sam_data_file'],
+            'level': 'INFO'
         },
         'fpds': {
             'handlers': ['fpds_file'],
@@ -205,7 +225,7 @@ LOGGING = {
             'handlers': ['fpds_data_file'],
             'level': 'INFO'
         }
-    },
+    }
 }
 
 DATABASES = {}
