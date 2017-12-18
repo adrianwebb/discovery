@@ -26,7 +26,7 @@ jobs:
           - v1-python-dep-
 
       - run:
-          name: install dependencies
+          name: Install dependencies
           command: |
             virtualenv venv
             source venv/bin/activate
@@ -39,24 +39,24 @@ jobs:
           key: v1-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
 
       - run:
-          name: set circle configuration
+          name: Set circle configuration
           command: |
             cp mirage/local_settings.circle.py mirage/local_settings.py
 
       - run:
-          name: migrate schema
+          name: Migrate schema
           command: |
             source venv/bin/activate
             python manage.py migrate --noinput
 
       - run:
-          name: load fixtures
+          name: Load fixtures
           command: |
             source venv/bin/activate
             ./load_fixtures.sh
 
       - run:
-          name: run tests
+          name: Run tests
           command: |
             source venv/bin/activate
             python manage.py test
