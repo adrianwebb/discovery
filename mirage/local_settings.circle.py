@@ -2,7 +2,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'HOST': 'localhost',
-        'NAME': 'circle_test',
+        'NAME': 'circle-test',
         'USER': 'circleci',
         'PASSWORD': 'circleci'
     }
