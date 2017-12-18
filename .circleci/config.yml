@@ -11,7 +11,7 @@ jobs:
         environment:
           POSTGRES_DB: circle-test
           POSTGRES_USER: circleci
-          POSTGRES_PASSWORD: "circleci"
+          POSTGRES_PASSWORD: circleci
 
     working_directory: ~/repo
 
@@ -21,27 +21,44 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "requirements.txt" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+          - v1-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
+          - v1-python-dep-{{ checksum "requirements.txt" }}
+          - v1-python-dep-
 
       - run:
           name: install dependencies
           command: |
             python3 -m venv venv
-            . venv/bin/activate
+            source venv/bin/activate
             pip install -r requirements.txt
+            pip install -r requirements-test.txt
 
       - save_cache:
           paths:
             - ./venv
-          key: v1-dependencies-{{ checksum "requirements.txt" }}
+          key: v1-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
 
-      # run tests!
+      - run:
+          name: set circle configuration
+          command: |
+            cp mirage/local_settings.circle.py mirage/local_settings.py
+
+      - run:
+          name: migrate schema
+          command: |
+            source venv/bin/activate
+            python3 manage.py migrate --noinput
+
+      - run:
+          name: load fixtures
+          command: |
+            source venv/bin/activate
+            ./load_vendor_fixtures.sh
+
       - run:
           name: run tests
           command: |
-            . venv/bin/activate
+            source venv/bin/activate
             python manage.py test
 
       - store_artifacts:
