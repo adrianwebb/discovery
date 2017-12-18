@@ -19,11 +19,11 @@ jobs:
       - checkout
 
       # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - v1-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
-          - v1-python-dep-{{ checksum "requirements.txt" }}
-          - v1-python-dep-
+      #- restore_cache:
+      #    keys:
+      #    - v1-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
+      #    - v1-python-dep-{{ checksum "requirements.txt" }}
+      #    - v1-python-dep-
 
       - run:
           name: install dependencies
@@ -33,10 +33,10 @@ jobs:
             pip install -r requirements.txt
             pip install -r requirements-test.txt
 
-      - save_cache:
-          paths:
-            - ./venv
-          key: v1-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
+      #- save_cache:
+      #    paths:
+      #      - ./venv
+      #    key: v1-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
 
       - run:
           name: set circle configuration
