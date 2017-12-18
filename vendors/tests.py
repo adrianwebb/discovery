@@ -14,7 +14,7 @@ class VendorLoadTest(TestCase):
     fixtures = ['naics.json', 'setasides.json', 'pools.json']
 
     def test_load(self):
-        call_command('load_vendors')
+        call_command('load_vendors', vpp=1)
 
 
     def test_sam_expiration_not_null(self):
