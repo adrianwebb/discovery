@@ -3,7 +3,7 @@ from django.test import TestCase
 from django.core.management import call_command
 
 class FPDSLoaderTest(TestCase):
-    """Tests the load_fpds management command with limited vendor set"""
+    """Tests the load_fpds management command"""
     fixtures = ['naics.json', 'setasides.json', 'fpds_test_vendor.json']
 
     def test_load(self):
