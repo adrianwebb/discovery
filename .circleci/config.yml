@@ -21,10 +21,9 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
-          - v1-python-dep-{{ checksum "requirements.txt" }}
-          - v1-python-dep-
-
+            - v1-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
+            - v1-python-dep-{{ checksum "requirements.txt" }}
+            - v1-python-dep-
       - run:
           name: Install dependencies
           command: |
@@ -32,14 +31,28 @@ jobs:
             source venv/bin/activate
             pip install -r requirements.txt
             pip install -r requirements-test.txt
-
-            curl -L https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 | tar -xj --strip-components=1 -C /tmp/phantomjs \
-              && mv /tmp/phantomjs/bin/phantomjs venv/bin
-
       - save_cache:
           paths:
             - ./venv
           key: v1-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
+
+      - restore_cache:
+          key: phantomjs-2-1-1
+      - run:
+          name: Install PhantomJS Dependencies
+          command: |
+            [ -f /usr/local/bin/phantomjs ] || apt-get update
+            [ -f /usr/local/bin/phantomjs ] || apt-get install -y fontconfig wget
+      - run:
+          name: Install PhantomJS
+          command: |
+            [ -f /usr/local/bin/phantomjs ] || wget -O /tmp/phantomjs.tar.bz2 https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
+            [ -f /usr/local/bin/phantomjs ] || tar -xjf /tmp/phantomjs.tar.bz2 -C /tmp
+            [ -f /usr/local/bin/phantomjs ] || mv /tmp/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin/phantomjs
+      - save_cache:
+          key: phantomjs-2-1-1
+          paths:
+            - /usr/local/bin/phantomjs
 
       - run:
           name: Set circle configuration
