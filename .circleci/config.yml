@@ -25,7 +25,7 @@ jobs:
             - v1-python-dep-{{ checksum "requirements.txt" }}
             - v1-python-dep-
       - run:
-          name: Install dependencies
+          name: Install Python dependencies
           command: |
             virtualenv venv
             source venv/bin/activate
@@ -39,7 +39,7 @@ jobs:
       - restore_cache:
           key: phantomjs-2-1-1
       - run:
-          name: Install PhantomJS Dependencies
+          name: Install PhantomJS dependencies
           command: |
             [ -f /usr/local/bin/phantomjs ] || sudo apt-get update
             [ -f /usr/local/bin/phantomjs ] || sudo apt-get install -y fontconfig wget
