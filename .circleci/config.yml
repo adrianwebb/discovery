@@ -21,9 +21,9 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
-            - v1-python-dep-{{ checksum "requirements.txt" }}
-            - v1-python-dep-
+            - python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
+            - python-dep-{{ checksum "requirements.txt" }}
+            - python-dep-
       - run:
           name: Install Python dependencies
           command: |
@@ -34,7 +34,7 @@ jobs:
       - save_cache:
           paths:
             - ./venv
-          key: v1-python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
+          key: python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
 
       - restore_cache:
           key: phantomjs-2-1-1
