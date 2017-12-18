@@ -228,9 +228,6 @@ LOGGING = {
     }
 }
 
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config()
-
 
 try:
     from mirage.local_settings import *
