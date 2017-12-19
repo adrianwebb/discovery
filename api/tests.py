@@ -1,5 +1,6 @@
 from django.test import Client, TestCase
 from django.utils import timezone
+import json
 
 from vendors.models import SamLoad
 
@@ -13,10 +14,12 @@ class NaicsTest(TestCase):
 
     def test_request_no_params(self):
         resp = self.c.get(self.path, {'format': 'json'})
+        print(json.dumps(resp, indent=2))
         self.assertEqual(resp.status_code, 200)
 
     def test_request_q_param(self):
         resp = self.c.get(self.path, {'q': 'test'})
+        print(json.dumps(resp, indent=2))
         self.assertEqual(resp.status_code, 200)
 
 '''
