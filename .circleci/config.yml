@@ -18,12 +18,11 @@ jobs:
     steps:
       - checkout
 
-      # Download and cache dependencies
-      #- restore_cache:
-      #    keys:
-      #      - python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
-      #      - python-dep-{{ checksum "requirements.txt" }}
-      #      - python-dep-
+     - restore_cache:
+          keys:
+            - python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
+            - python-dep-{{ checksum "requirements.txt" }}
+            - python-dep-
       - run:
           name: Install Python dependencies
           command: |
@@ -31,10 +30,10 @@ jobs:
             source venv/bin/activate
             pip install -r requirements.txt
             pip install -r requirements-test.txt
-      #- save_cache:
-      #    paths:
-      #      - ./venv
-      #    key: python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
+      - save_cache:
+          paths:
+            - ./venv
+          key: python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
 
       - restore_cache:
           key: 1-phantomjs-2-1-1
@@ -58,18 +57,6 @@ jobs:
           name: Set CircleCI configuration
           command: |
             cp mirage/local_settings.circle.py mirage/local_settings.py
-
-      #- run:
-      #    name: Migrate schema
-      #    command: |
-      #      source venv/bin/activate
-      #      python manage.py migrate --noinput
-
-      #- run:
-      #    name: Load fixtures
-      #    command: |
-      #      source venv/bin/activate
-      #      ./load_fixtures.sh
 
       - run:
           name: Run tests
