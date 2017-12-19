@@ -100,7 +100,7 @@ class ContractsTest(TestCase):
         self.assertEqual(resp.status_code, 400)
 
     def test_default_pagination(self):
-        resp = self.c.get(self.path, {'duns': '197138274'})
+        resp = self.c.get(self.path, {'duns': '049192649'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(len(resp.data['results']), 100)
         self.assertEqual(resp.data['previous'], None)
@@ -108,20 +108,20 @@ class ContractsTest(TestCase):
         self.assertEqual(resp.data['num_results'], 5174)
 
     def test_naics_filter(self):
-        resp = self.c.get(self.path, {'duns': '197138274', 'naics': '541330'})
+        resp = self.c.get(self.path, {'duns': '049192649', 'naics': '541330'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.data['num_results'], 4096)
 
     def test_default_sort(self):
-        resp = self.c.get(self.path, {'duns': '197138274', 'sort': 'status'})
-        resp2 = self.c.get(self.path, {'duns': '197138274', 'sort': 'status', 'direction': 'desc'})
+        resp = self.c.get(self.path, {'duns': '049192649', 'sort': 'status'})
+        resp2 = self.c.get(self.path, {'duns': '049192649', 'sort': 'status', 'direction': 'desc'})
         #responses should be equal because default sort is desc
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp2.status_code, 200)
         self.assertEqual(resp.data['results'], resp2.data['results'])
 
     def test_sort_with_all_params(self):
-        resp = self.c.get(self.path, {'duns': '197138274', 'sort': 'status', 'direction': 'asc'})
+        resp = self.c.get(self.path, {'duns': '049192649', 'sort': 'status', 'direction': 'asc'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.data['results'][0]['status'], 'Completed')
 
