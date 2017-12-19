@@ -5,7 +5,7 @@ from vendors.models import SamLoad
 
 class NaicsTest(TestCase):
     """tests for NAICS API endpoint"""
-    fixtures = ['naics.json']
+    #fixtures = ['naics.json']
 
     def setUp(self):
         self.c = Client()
@@ -22,7 +22,7 @@ class NaicsTest(TestCase):
 
 class VendorsTest(TestCase):
     """test for vendor API endpoint"""
-    fixtures = ['vendors.json']
+    #fixtures = ['vendors.json']
  
     def setUp(self):
         self.c = Client()
@@ -76,7 +76,7 @@ class VendorsTest(TestCase):
 
 class VendorTest(TestCase):
     """ tests single vendor endpoint """
-    fixtures = ['vendors.json']
+    #fixtures = ['vendors.json']
 
     def setUp(self):
         self.c = Client()
@@ -89,7 +89,7 @@ class VendorTest(TestCase):
 
 class ContractsTest(TestCase):
     """tests for Contracts API endpoint"""
-    fixtures = ['vendors.json', 'contracts.json']
+    #fixtures = ['vendors.json', 'contracts.json']
 
     def setUp(self):
         self.c = Client()
@@ -127,7 +127,7 @@ class ContractsTest(TestCase):
 
 class MetadataTest(TestCase):
     """ Tests the metadata endpoint """
-    fixtures = ['samloads.json', 'fpdsloads.json']
+    #fixtures = ['samloads.json', 'fpdsloads.json']
 
     def setUp(self):
         self.c = Client()
