@@ -19,7 +19,7 @@ class NaicsTest(TestCase):
         resp = self.c.get(self.path, {'q': 'test'})
         self.assertEqual(resp.status_code, 200)
 
-
+'''
 class VendorsTest(TestCase):
     """test for vendor API endpoint"""
     #fixtures = ['vendors.json']
@@ -138,7 +138,7 @@ class MetadataTest(TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertNotEqual(None, resp.data['sam_load_date'])
         self.assertNotEqual(None, resp.data['fpds_load_date'])
-
+'''
 
 
 
