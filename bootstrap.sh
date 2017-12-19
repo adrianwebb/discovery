@@ -5,6 +5,7 @@ apt-get install -y postgresql-9.3 pgadmin3
 apt-get install -y python-pip
 apt-get install -y python-virtualenv
 apt-get install -y libpq-dev python-dev
+apt-get install -y fontconfig wget
 
 #set up database
 sed -i 's/^#listen_addresses.*/listen_addresses = '"'"'*'"'"'/' /etc/postgresql/9.3/main/postgresql.conf
@@ -39,6 +40,12 @@ update-rc.d redis defaults
 virtualenv /vagrant/mirage_venv
 source /vagrant/mirage_venv/bin/activate
 pip install -r /vagrant/requirements.txt
+pip install -r /vagrant/requirements-test.txt
+
+#install phantomJS
+wget -O /tmp/phantomjs.tar.bz2 https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
+tar -xjf /tmp/phantomjs.tar.bz2 -C /tmp
+mv /tmp/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /vagrant/mirage_venv/bin/phantomjs
 
 #set up application
 source /vagrant/mirage_venv/bin/activate
