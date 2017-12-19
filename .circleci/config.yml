@@ -18,7 +18,7 @@ jobs:
     steps:
       - checkout
 
-     - restore_cache:
+      - restore_cache:
           keys:
             - python-dep-{{ checksum "requirements.txt" }}-{{ checksum "requirements-test.txt" }}
             - python-dep-{{ checksum "requirements.txt" }}
